@@ -1,6 +1,6 @@
 ---
-description: "Use para regras de gestao de issues/milestones/branches/PRs e sincronizacao do espelho local em docs/milestones."
-name: "MSXBarePi Project Management"
+description: "Use para regras de gestao de issues, milestones, branches, PRs e sincronizacao do espelho local em docs/milestones."
+name: "Plexa Project Management"
 applyTo:
   - "docs/github-project-management.md"
   - "docs/milestones/**"
@@ -8,45 +8,45 @@ applyTo:
   - "CONTEXT.md"
   - "docs/handoff/**"
 ---
-# MSXBarePi Project Management
+# Plexa Project Management
 
 ## Objetivo
 
-- Manter fluxo previsivel de trabalho entre issues, branches, PRs e milestones.
+- Manter fluxo previsivel de planejamento entre backlog remoto no GitHub e espelho documental local.
 
 ## Fonte de verdade
 
 - Seguir `docs/github-project-management.md` como referencia principal de processo.
-- Este arquivo define guardrails compactos; comandos detalhados/checklists operacionais ficam no documento de gestao.
+- Este arquivo define guardrails compactos; detalhes operacionais ficam no documento de gestao.
 
 ## Ferramentas GitHub
 
-- Preferir **GitHub MCP** para operacoes de gestao (issues, PRs, projeto, milestones) sempre que estiver disponivel/funcional.
-- Usar **`gh` CLI apenas como fallback** quando MCP estiver indisponivel, com erro de autenticacao/permissao, ou sem suporte para a operacao desejada.
+- Preferir **GitHub MCP** para operacoes de gestao sempre que estiver disponivel e funcional.
+- Usar **`gh` CLI apenas como fallback** quando MCP estiver indisponivel, sem suporte ou com erro de permissao/autenticacao.
 
 ## Branches
 
-- Branch de issue deve ser vinculada a issue de origem.
-- Branch de release deve seguir padrao `release/<versao>`.
+- A branch `main` concentra a fundacao documental e a referencia mais atual do planejamento.
+- Branches futuras de trabalho devem ser vinculadas a issue de origem.
+- Branches de release devem seguir o padrao `release/<versao>`.
 - Nunca reescrever historico da `main`.
 - Antes de remover branch local, confirmar com o usuario.
 
-## Ciclo de issue/board
+## Ciclo de issue e board
 
-- Atualizar status de item no projeto: `In progress` -> `In review` -> `Done`.
-- Se testes falharem, voltar item para `In progress`.
-- Ao concluir issue, mover item para `Done` no mesmo ciclo.
-- Ao iniciar milestone, preparar board movendo abertas para `Ready` e manter apenas a ativa em `In progress`.
+- Atualizar status do item no projeto: `Ready` -> `In progress` -> `In review` -> `Done`.
+- Se uma atividade voltar a exigir refinamento, retornar o item para `In progress`.
+- Ao concluir uma issue, sincronizar o espelho local no mesmo ciclo.
 
 ## PRs
 
-- Ao concluir issue estavel, abrir PR da branch da issue para `main`.
-- Enviar link do PR para aprovacao/review antes de seguir para proxima issue.
-- Garantir labels coerentes entre issue e PR (prioridade/tipo/area/beta).
+- Ao concluir um bloco estavel de trabalho, abrir PR para `main`.
+- Enviar o link do PR para aprovacao/review antes de seguir para o proximo bloco relevante.
+- Garantir labels coerentes entre issue e PR.
 
-## Espelho local de milestones/issues
+## Espelho local de milestones e issues
 
-- Manter `docs/milestones/` sincronizado com remoto.
+- Manter `docs/milestones/` sincronizado com o backlog remoto.
 - Cada milestone remota deve ter pasta local com `README.md` e campo `Milestone remota: #<numero>`.
-- Cada pasta de milestone deve conter `CHALLENGES.md` com desafios/solucao/encaminhamento por issue.
-- Cada issue da milestone deve ter arquivo `<numero>-<slug>.md`, inclusive fechadas para historico.
+- Cada pasta de milestone deve conter `CHALLENGES.md` com desafios, decisoes e encaminhamentos por issue.
+- Cada issue da milestone deve ter arquivo `<numero>-<slug>.md`, inclusive fechadas, para historico.

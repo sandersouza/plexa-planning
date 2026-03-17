@@ -1,27 +1,24 @@
 ---
-description: "Use para diretrizes base de comparação de código, referências técnicas e alinhamento de implementação."
-name: "Code Reference and Implementation Alignment"
+description: "Use para diretrizes de referencia tecnica, benchmarks de arquitetura e alinhamento entre documentacao de planejamento e implementacao futura."
+name: "Plexa Code and Reference Alignment"
 applyTo:
-  - "src/**"
+  - "docs/**"
 ---
-
-# Code Reference and Implementation Alignment
+# Plexa Code and Reference Alignment
 
 ## Objetivo
 
-- Ter como base, outros códigos de referência, sejam eles de terceiros (ex.: `third_party/fmsx`, `third_party/circle`) ou internos (ex.: `src/`, `include/`, `docs/`), para garantir alinhamento técnico, consistência e evitar retrabalho; usando como base a semântica de código, organização, padrões de implementação e documentação desses códigos de referência, incluindo mas não somente:
-  - Estrutura de código e organização de arquivos.
-  - Padrões de implementação e estilo de código.
-  - Documentação técnica e comentários.
-  - Abordagem para resolução de problemas técnicos específicos (ex.: emulação de VDP, gerenciamento de memória, etc.).
-  - Código implementado e funcionais em outros emuladores MSX (ex.: `blueberrymsx`, `blueMSX`) para comportamento de hardware específico, como VDP V9958, mapeadores, etc.
-  - VHDL de projetos como `ocm-pld-dev` e `V9958-Super` para comportamento de hardware específico, como VDP V9958.
+- Usar referencias tecnicas e de produto para reduzir retrabalho, alinhar padroes e justificar decisoes de arquitetura.
 
-## Diretrizes de implementacao
+## Diretrizes
 
-- Antes de implementar uma funcionalidade ou resolver um problema técnico, consultar os códigos de referência para entender como eles abordam a questão.
-- Se uma solução já existe em um código de referência e é aplicável ao contexto do `msxbarepi`, usá-la como base, adaptando-a conforme necessário para o ambiente baremetal e requisitos específicos do projeto.
-- Documentar claramente no código e/ou documentação técnica quando uma implementação é inspirada ou baseada em um código de referência, incluindo qual código de referência foi usado e quais partes foram adaptadas ou modificadas.
-- Evitar reinventar a roda: se um código de referência já implementa uma funcionalidade de forma eficaz, priorizar o uso dessa implementação em vez de criar uma nova do zero, a menos que haja uma justificativa técnica clara para isso (ex.: requisitos de desempenho, limitações do ambiente baremetal, etc.).
-- Manter um alinhamento técnico consistente com os códigos de referência, especialmente em áreas críticas como emulação de hardware, gerenciamento de memória, e arquitetura de software, para garantir que o projeto se beneficie das melhores práticas e soluções já testadas em outros projetos de emulação MSX e emuladores baremetal.
-- Para funcionalidades específicas de hardware (ex.: VDP V9958), priorizar a consulta cruzada entre múltiplos códigos de referência (ex.: `blueberrymsx`, `blueMSX`, `ocm-pld-dev`, `V9958-Super`, outros ) para garantir uma compreensão abrangente do comportamento esperado e evitar ajustes ad hoc baseados em um único código de referência.
+- Antes de definir um padrao de arquitetura, scaffold ou integracao, consultar referencias internas e externas relevantes.
+- Quando uma decisao for influenciada por referencia externa, registrar a fonte e o motivo da adocao.
+- Priorizar alinhamento entre os documentos de planejamento para que frontend, backend e operacao usem a mesma linguagem de dominio.
+- Evitar reinventar estruturas de organizacao, workflow ou scaffold quando existir referencia solida e adaptavel ao contexto da Plexa.
+
+## Escopo de referencias
+
+- Modelos de arquitetura para FastAPI e microservicos.
+- Referencias de UX e organizacao funcional para CRM, agenda, estoque, financeiro e relacionamento com clientes.
+- Padroes de governanca documental, backlog e definicao de contratos REST.

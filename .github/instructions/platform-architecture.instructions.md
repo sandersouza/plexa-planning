@@ -1,58 +1,39 @@
 ---
-description: "Use para diretrizes base de plataforma/arquitetura baremetal no msxbarepi (Raspberry Pi 3B, C/ASM, freestanding, MMIO, debug HDMI)."
-name: "MSXBarePi Platform and Architecture"
+description: "Use para diretrizes base de arquitetura da plataforma Plexa, incluindo dominios, canais, integracoes e principios de modularidade."
+name: "Plexa Platform Architecture"
 applyTo:
-  - "src/**"
-  - "include/**"
-  - "linker/**"
-  - "Makefile"
   - "docs/**"
+  - "AGENTS.md"
+  - "CONTEXT.md"
 ---
-# MSXBarePi Platform and Architecture
+# Plexa Platform Architecture
 
 ## Objetivo
 
-- Garantir consistencia tecnica da base baremetal para Raspberry Pi 3B.
+- Garantir consistencia entre a arquitetura de negocio, os canais de experiencia e a estrategia de plataforma.
 
-## Plataforma alvo
+## Diretrizes de arquitetura
 
-- Arquitetura: AArch64.
-- Artefato de boot: `kernel8.img`.
-- Execucao freestanding/no-libc (`-ffreestanding`, `-nostdlib`).
+- Tratar a plataforma como um ecossistema integrado para `Clientes`, `Clinicas` e `Fornecedores`.
+- Priorizar arquitetura modular, orientada a dominios e preparada para evolucao por microservicos.
+- Separar claramente responsabilidades de frontend, backend, integracoes e dados, mesmo quando o planejamento estiver em um unico repositorio.
+- Documentar dependencias entre modulos e contratos esperados entre dominios antes de detalhar implementacao.
 
-## Linguagens e escopo
+## Stack-alvo inicial
 
-- Preferir C para runtime/kernel e logica de emulacao.
-- Limitar Assembly a bootstrap e trechos estritamente de baixo nivel.
+- Backend prioritariamente em Python com FastAPI.
+- Frontend com diretriz `Python-first`, a ser validada por viabilidade tecnica por canal.
+- Persistencia combinando PostgreSQL e MongoDB conforme natureza dos dados.
+- APIs internas e externas orientadas a REST como baseline.
 
-## Diretrizes de implementacao
+## Canais e superficies
 
-- Priorizar codigo simples, deterministico e legivel.
-- Evitar alocacao dinamica nesta fase, salvo necessidade tecnica clara.
-- Encapsular MMIO em helpers dedicados e documentar objetivo/registradores.
-- Evitar abstracoes prematuras em caminhos de hardware sensiveis.
+- Considerar, no minimo, `web administrativo`, `portal` e `app mobile` no planejamento inicial.
+- Mapear experiencias por persona e por canal antes de detalhar telas, componentes ou fluxos tecnicos.
+- Explicitar quando uma capacidade pertence a um unico canal ou precisa ser compartilhada entre multiplos.
 
-## Video e debug
+## Qualidade de planejamento
 
-- HDMI e saida de video obrigatoria.
-- UART e canal auxiliar de debug.
-- Para overlay runtime HDMI, seguir baseline de `docs/debug-layer.md`.
-
-## Referencias tecnicas
-
-- Consultar `third_party/circle` e `third_party/fmsx` antes de implementar do zero.
-- Em drivers/perifericos sensiveis (audio, DMA, clock, video), registrar fonte conceitual usada.
-
-## Marcos tecnicos de alto nivel
-
-- Boot minimo + UART.
-- Timer/IRQ basicos.
-- Framebuffer/VDP de debug.
-- Loop principal de emulacao.
-- Carregamento de ROM e mapeadores principais.
-
-## Definition of Done (fase atual)
-
-- Build gera imagem de kernel sem erros.
-- Boot no Raspberry Pi 3B sem OS.
-- Telemetria/saida minima de validacao visivel (HDMI e/ou UART conforme etapa).
+- Registrar contexto, trade-offs, riscos e criterios de validacao para decisoes arquiteturais.
+- Evitar assumir detalhes irreversiveis de implementacao sem justificativa tecnica.
+- Preferir artefatos curtos, rastreaveis e versionados por tema.
